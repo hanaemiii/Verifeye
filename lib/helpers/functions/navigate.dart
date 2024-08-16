@@ -1,4 +1,4 @@
-import 'package:verifeye/enum/enum.dart';
+import 'package:verifeye/enums/enum.dart';
 
 class Navigate {
   Map<String, dynamic> choosePage(page) {
