@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:touch_ripple_effect/touch_ripple_effect.dart';
 import 'package:verifeye/base/theme/colors.dart';
 
 class AuthenticationButton extends StatefulWidget {
@@ -22,7 +23,8 @@ class AuthenticationButton extends StatefulWidget {
 class _AuthenticationButtonState extends State<AuthenticationButton> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return TouchRippleEffect(
+      rippleColor: AppColors.white.withOpacity(0.75),
       onTap: () {
         widget.onTap?.call();
       },

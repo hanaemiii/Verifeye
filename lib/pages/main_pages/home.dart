@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                 ? dottedAreaWidget()
                 :
                 // Image.asset(
-                //   'assets/images/upload.png',
+                //   AppAssets.upload,
                 //   height: 164.0,
                 //   width: 164.0,
                 // ),

@@ -1,4 +1,6 @@
 PODS:
+  - camera_avfoundation (0.0.1):
+    - Flutter
   - cloud_firestore (5.2.1):
     - Firebase/Firestore (= 10.29.0)
     - firebase_core
@@ -108,8 +110,11 @@ PODS:
     - FlutterMacOS
   - PromisesObjC (2.4.0)
   - RecaptchaInterop (100.0.0)
+  - touch_ripple_effect (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
+  - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -118,6 +123,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - touch_ripple_effect (from `.symlinks/plugins/touch_ripple_effect/ios`)
 
 SPEC REPOS:
   trunk:
@@ -144,6 +150,8 @@ SPEC REPOS:
     - RecaptchaInterop
 
 EXTERNAL SOURCES:
+  camera_avfoundation:
+    :path: ".symlinks/plugins/camera_avfoundation/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   firebase_auth:
@@ -161,6 +169,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_picker_ios/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  touch_ripple_effect:
+    :path: ".symlinks/plugins/touch_ripple_effect/ios"
 
 CHECKOUT OPTIONS:
   FirebaseFirestore:
@@ -168,6 +178,7 @@ CHECKOUT OPTIONS:
     :tag: 10.29.0
 
 SPEC CHECKSUMS:
+  camera_avfoundation: dd002b0330f4981e1bbcb46ae9b62829237459a4
   cloud_firestore: 8a2ff2bb050f87d0ca996866625cefbe2395a83b
   Firebase: cec914dab6fd7b1bd8ab56ea07ce4e03dd251c2d
   firebase_auth: 8dbfcdd635cc4fb2ea213aeee8c9a979b3d3373b
@@ -197,6 +208,7 @@ SPEC CHECKSUMS:
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
+  touch_ripple_effect: 5b850cbec069237959ef95e7e81e7ee7f934ac76
 
 PODFILE CHECKSUM: c8283f886c1beca3a32d2148aa16ef4e34d55c8b
 

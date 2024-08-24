@@ -5,10 +5,11 @@ import 'package:verifeye/base/theme/colors.dart';
 import 'package:verifeye/bloc/authentication%20blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:verifeye/bloc/authentication%20blocs/sign_in_bloc/sign_in_event.dart';
 import 'package:verifeye/bloc/authentication%20blocs/sign_in_bloc/sign_in_state.dart';
+import 'package:verifeye/core/global_values/global_values.dart';
 import 'package:verifeye/enums/enum.dart';
 import 'package:verifeye/helpers/dialogs/adaptive_dialog.dart';
 import 'package:verifeye/pages/auth_pages/forgot_password_page.dart';
-import 'package:verifeye/pages/navigation.dart';
+import 'package:verifeye/pages/main_pages/navigation.dart';
 import 'package:verifeye/pages/auth_pages/sign_up_page.dart';
 import 'package:verifeye/widgets/authentication_button.dart';
 import 'package:verifeye/widgets/custom_text_field.dart';
@@ -25,18 +26,17 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     double bottomHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
       body: Container(
-        height: height,
+        height: screenHeight,
         color: AppColors.gray.withOpacity(0.1),
         padding: EdgeInsets.only(
           right: 32,
           left: 32,
-          bottom: bottomHeight == 0 ? height / 4 : 0,
-          top: (height / 5) - (bottomHeight / 4),
+          bottom: bottomHeight == 0 ? screenHeight / 4 : 0,
+          top: (screenHeight / 5) - (bottomHeight / 4),
         ),
         child: SingleChildScrollView(
           child: Column(

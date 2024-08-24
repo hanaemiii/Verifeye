@@ -3,8 +3,8 @@ import 'package:verifeye/core/forms/general_form.dart';
 
 class SignUpForm extends GeneralForm {
   static const _emailControlName = 'email';
-  static const _firstNameControlName = 'first_name';
-  static const _lastNameControlName = 'last_name';
+  static const _firstNameControl = 'first_name';
+  static const _lastNameControl = 'last_name';
   static const _passwordControlName = 'password';
   static const _confirmPasswordControlName = 'confirm_password';
   static const _agreeControlName = 'agree';
@@ -19,10 +19,10 @@ class SignUpForm extends GeneralForm {
                   Validators.email,
                 ],
               ),
-              _firstNameControlName: FormControl<String>(
+              _firstNameControl: FormControl<String>(
                 validators: [Validators.required],
               ),
-              _lastNameControlName: FormControl<String>(
+              _lastNameControl: FormControl<String>(
                 validators: [Validators.required],
               ),
               _passwordControlName: FormControl<String>(
@@ -55,9 +55,9 @@ class SignUpForm extends GeneralForm {
   FormControl<String> get emailControl =>
       formGroup.control(_emailControlName) as FormControl<String>;
   FormControl<String> get firstNameControl =>
-      formGroup.control(_firstNameControlName) as FormControl<String>;
+      formGroup.control(_firstNameControl) as FormControl<String>;
   FormControl<String> get lastNameControl =>
-      formGroup.control(_lastNameControlName) as FormControl<String>;
+      formGroup.control(_lastNameControl) as FormControl<String>;
   FormControl<String> get passwordControl =>
       formGroup.control(_passwordControlName) as FormControl<String>;
   FormControl<String> get confirmPasswordControl =>

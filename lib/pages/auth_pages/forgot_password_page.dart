@@ -5,6 +5,7 @@ import 'package:verifeye/base/theme/colors.dart';
 import 'package:verifeye/bloc/authentication%20blocs/forgot_password_bloc/forgot_password_bloc.dart';
 import 'package:verifeye/bloc/authentication%20blocs/forgot_password_bloc/forgot_password_event.dart';
 import 'package:verifeye/bloc/authentication%20blocs/forgot_password_bloc/forgot_password_state.dart';
+import 'package:verifeye/core/global_values/global_values.dart';
 import 'package:verifeye/helpers/dialogs/adaptive_dialog.dart';
 import 'package:verifeye/widgets/authentication_button.dart';
 import 'package:verifeye/widgets/custom_text_field.dart';
@@ -21,7 +22,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    double height = screenHeight;
     double bottomHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
