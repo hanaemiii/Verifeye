@@ -55,7 +55,14 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       validationMessages: {
         ValidationMessage.required: (error) => 'Field must not be empty',
         ValidationMessage.email: (error) => 'Must enter a valid email',
-        ValidationMessage.minLength: (error) => 'Must contain 4 numbers.',
+        ValidationMessage.mustMatch: (error) => 'Passwords do not match',
+        ValidationMessage.minLength: (error) =>
+            "Must be at least 8 characters.",
+        ValidationMessage.pattern: (error) =>
+            'Invalid input. Please ensure the password contains:\n'
+            '- At least one uppercase letter\n'
+            '- Digits or symbols\n'
+            '- No spaces',
       },
       child: ReactiveTextField(
         obscureText: obscureText,
@@ -114,7 +121,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                 color: AppColors.black.withOpacity(0.33),
               ),
           labelText: widget.labelText,
-          labelStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
+          labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: AppColors.black.withOpacity(0.8),
               ),
           floatingLabelAlignment: FloatingLabelAlignment.start,

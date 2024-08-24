@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: AppColors.gray.withOpacity(0.1),
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
         flexibleSpace: Container(
           color: AppColors.black.withOpacity(0.85),
           // decoration: const BoxDecoration(
@@ -121,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: Container(
                   color: Colors.red,
-                  child: Text('upload'),
+                  child: const Text('upload'),
                 ),
               ),
             ],

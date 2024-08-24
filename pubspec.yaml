@@ -45,6 +45,8 @@ dependencies:
   get_it: ^7.7.0
   firebase_auth: ^5.1.4
   reactive_forms: ^17.0.1
+  cloud_firestore: ^5.2.1
+  firebase_auth_platform_interface: ^7.4.3
 
 dev_dependencies:
   flutter_test:

@@ -23,7 +23,9 @@ class _AuthenticationButtonState extends State<AuthenticationButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => widget.onTap,
+      onTap: () {
+        widget.onTap?.call();
+      },
       child: Container(
         padding: EdgeInsets.symmetric(
           vertical: 16,

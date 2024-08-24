@@ -31,7 +31,6 @@ class MainBloc extends Bloc<MainEvent, MainState> {
 
   Future<void> choosePhoto(
       ChoosePhotoEvent event, Emitter<MainState> emit) async {
-    print('tapped');
     // pick image from gallery
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
@@ -47,16 +46,15 @@ class MainBloc extends Bloc<MainEvent, MainState> {
 
   Future<void> sendToStorage(
       SendToStorageEvent event, Emitter<MainState> emit) async {
-    print('done');
     String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
     final String generatedName = generateImageName.generateName();
     // make file name
     String imageName = 'images/$currentUserUid/$generatedName';
+    // ignore: unused_local_variable
     String imageUrl = await firebaseStorageService.uploadImage(
       state.file!,
       imageName,
     );
-    print(imageUrl);
     // pass this url to user
   }
 }

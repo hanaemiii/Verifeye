@@ -2,13 +2,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:verifeye/bloc/authentication%20blocs/forgot_password_bloc/forgot_password_bloc.dart';
 import 'package:verifeye/bloc/main_bloc/main_bloc.dart';
-import 'package:verifeye/bloc/sign_in_bloc/sign_in_bloc.dart';
+import 'package:verifeye/bloc/authentication%20blocs/sign_in_bloc/sign_in_bloc.dart';
+import 'package:verifeye/bloc/authentication%20blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:verifeye/core/injector/injector.dart';
 import 'package:verifeye/firebase_options.dart';
 import 'package:verifeye/base/theme/colors.dart';
 import 'package:verifeye/base/theme/text_theme.dart';
-import 'package:verifeye/pages/sign_in_page.dart';
+import 'package:verifeye/pages/auth_pages/sign_in_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +32,12 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => SignInBloc(),
+        ),
+        BlocProvider(
+          create: (context) => SignUpBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ForgotPasswordBloc(),
         ),
         BlocProvider(
           create: (context) => MainBloc(),
