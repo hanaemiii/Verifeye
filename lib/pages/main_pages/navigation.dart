@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:verifeye/core/global_values/global_values.dart';
 import 'package:verifeye/enums/enum.dart';
-import 'package:verifeye/pages/home.dart';
+import 'package:verifeye/pages/main_pages/home.dart';
 import 'package:verifeye/helpers/functions/navigate.dart';
-import 'package:verifeye/pages/search.dart';
-import 'package:verifeye/pages/settings.dart';
+import 'package:verifeye/pages/main_pages/search.dart';
+import 'package:verifeye/pages/main_pages/settings.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({
@@ -46,9 +47,9 @@ class _NavigationPagestate extends State<NavigationPage> {
       child: Scaffold(
         body: pages[selectedIndex!],
         bottomNavigationBar: Container(
-          height: MediaQuery.of(context).size.height < 800
+          height: screenHeight < 800
               ? 70
-              : MediaQuery.of(context).size.height > 1000
+              : screenHeight > 1000
                   ? 90
                   : 95,
           decoration: BoxDecoration(

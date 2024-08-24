@@ -4,6 +4,7 @@ import 'package:verifeye/base/theme/colors.dart';
 import 'package:verifeye/bloc/authentication%20blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:verifeye/bloc/authentication%20blocs/sign_up_bloc/sign_up_event.dart';
 import 'package:verifeye/bloc/authentication%20blocs/sign_up_bloc/sign_up_state.dart';
+import 'package:verifeye/core/global_values/global_values.dart';
 import 'package:verifeye/helpers/dialogs/adaptive_dialog.dart';
 import 'package:verifeye/widgets/authentication_button.dart';
 import 'package:verifeye/widgets/custom_check_box.dart';
@@ -21,7 +22,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     double bottomHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return PopScope(
@@ -44,7 +44,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
         body: Container(
-          height: height,
+          height: screenHeight,
           color: AppColors.gray.withOpacity(0.1),
           padding: const EdgeInsets.only(
             right: 32,
@@ -55,7 +55,7 @@ class _SignUpPageState extends State<SignUpPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: (height / 14) - (bottomHeight / 7),
+                  height: (screenHeight / 14) - (bottomHeight / 7),
                 ),
                 Column(
                   children: [
@@ -68,7 +68,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             fontSize: 40,
                           ),
                     ),
-                    fieldsAdnButtonWidget(height),
+                    fieldsAdnButtonWidget(screenHeight),
                   ],
                 ),
               ],
