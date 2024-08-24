@@ -1,11 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:verifeye/enum/enum.dart';
+import 'package:verifeye/bloc/authentication%20blocs/forgot_password_bloc/forgot_password_bloc.dart';
+import 'package:verifeye/bloc/main_bloc/main_bloc.dart';
+import 'package:verifeye/bloc/authentication%20blocs/sign_in_bloc/sign_in_bloc.dart';
+import 'package:verifeye/bloc/authentication%20blocs/sign_up_bloc/sign_up_bloc.dart';
+import 'package:verifeye/core/injector/injector.dart';
 import 'package:verifeye/firebase_options.dart';
-import 'package:verifeye/pages/navigation_page.dart';
-import 'package:verifeye/theme/colors.dart';
-import 'package:verifeye/theme/text_theme.dart';
+import 'package:verifeye/base/theme/colors.dart';
+import 'package:verifeye/base/theme/text_theme.dart';
+import 'package:verifeye/pages/auth_pages/sign_in_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +18,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  registerSingletons();
+
   runApp(const MyApp());
 }
 
@@ -21,20 +28,39 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'VerifEye',
-      theme: ThemeData(
-        fontFamily: GoogleFonts.sen().fontFamily,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.black,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SignInBloc(),
         ),
-        primaryColor: AppColors.black,
-        useMaterial3: true,
-        primaryTextTheme: AppTextTheme.primaryTextTheme,
-      ),
-      home: const NavigationPage(
-        selectedPage: NavigationPages.home,
+        BlocProvider(
+          create: (context) => SignUpBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ForgotPasswordBloc(),
+        ),
+        BlocProvider(
+          create: (context) => MainBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'VerifEye',
+        theme: ThemeData(
+          textSelectionTheme: TextSelectionThemeData(
+            selectionColor: AppColors.greenCyan.withOpacity(0.5),
+            selectionHandleColor: AppColors.greenCyan,
+            cursorColor: AppColors.greenCyan,
+          ),
+          fontFamily: GoogleFonts.sen().fontFamily,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: AppColors.black,
+          ),
+          primaryColor: AppColors.black,
+          useMaterial3: true,
+          primaryTextTheme: AppTextTheme.primaryTextTheme,
+        ),
+        home: const SignInPage(),
       ),
     );
   }

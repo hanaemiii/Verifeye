@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:verifeye/enum/enum.dart';
-import 'package:verifeye/pages/home_page.dart';
-import 'package:verifeye/functions/navigate.dart';
-import 'package:verifeye/pages/search_page.dart';
-import 'package:verifeye/pages/settings_page.dart';
+import 'package:verifeye/enums/enum.dart';
+import 'package:verifeye/pages/home.dart';
+import 'package:verifeye/helpers/functions/navigate.dart';
+import 'package:verifeye/pages/search.dart';
+import 'package:verifeye/pages/settings.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({
@@ -83,7 +83,7 @@ class _NavigationPagestate extends State<NavigationPage> {
                   icon: Icon(
                     Icons.abc,
                   ),
-                  label: 'Settings',
+                  label: 'Settings ',
                 ),
               ],
               currentIndex: selectedIndex!,

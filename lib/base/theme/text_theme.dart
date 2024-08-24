@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:verifeye/theme/colors.dart';
+import 'package:verifeye/base/theme/colors.dart';
 
 class AppTextTheme {
   static final primaryTextTheme = GoogleFonts.senTextTheme(
