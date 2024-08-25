@@ -6,9 +6,9 @@ import 'package:verifeye/bloc/authentication%20blocs/sign_up_bloc/sign_up_event.
 import 'package:verifeye/bloc/authentication%20blocs/sign_up_bloc/sign_up_state.dart';
 import 'package:verifeye/core/global_values/global_values.dart';
 import 'package:verifeye/helpers/dialogs/adaptive_dialog.dart';
-import 'package:verifeye/widgets/authentication_button.dart';
-import 'package:verifeye/widgets/custom_check_box.dart';
-import 'package:verifeye/widgets/custom_text_field.dart';
+import 'package:verifeye/widgets/buttons/authentication_button.dart';
+import 'package:verifeye/widgets/custom%20fields/custom_check_box.dart';
+import 'package:verifeye/widgets/custom%20fields/custom_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});

@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:verifeye/widgets/dialog_ok_button.dart';
-import 'package:verifeye/widgets/resend_email_button.dart';
+import 'package:verifeye/widgets/buttons/dialog_ok_button.dart';
+import 'package:verifeye/widgets/buttons/resend_email_button.dart';
 
 class AdaptiveDialog {
   void showAdaptiveDialog(

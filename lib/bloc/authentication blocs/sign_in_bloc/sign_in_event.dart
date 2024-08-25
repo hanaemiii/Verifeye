@@ -27,3 +27,5 @@ class ResendVerificationEmailEvent extends SignInEvent {
     required this.onSuccess,
   });
 }
+
+class ResetStateEvent extends SignInEvent {}

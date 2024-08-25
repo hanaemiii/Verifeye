@@ -95,6 +95,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
               borderRadius: BorderRadius.circular(16),
               borderSide: const BorderSide(
                 color: AppColors.greenCyan,
+                width: 2,
               ),
             ),
             shadow: BoxShadow(

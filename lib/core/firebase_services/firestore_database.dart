@@ -28,4 +28,9 @@ class FirestoreDatabaseService {
           user.toMap(),
         );
   }
+
+  // delete user from users collection
+  Future<void> deleteUser(String userUId) async {
+    await FirebaseFirestore.instance.collection('users').doc(userUId).delete();
+  }
 }

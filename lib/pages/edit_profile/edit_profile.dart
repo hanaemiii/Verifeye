@@ -7,8 +7,8 @@ import 'package:verifeye/bloc/account_bloc/account_event.dart';
 import 'package:verifeye/bloc/account_bloc/account_state.dart';
 import 'package:verifeye/core/global_values/global_values.dart';
 import 'package:verifeye/helpers/dialogs/change_profile_pic_dialog.dart';
-import 'package:verifeye/widgets/authentication_button.dart';
-import 'package:verifeye/widgets/custom_text_field.dart';
+import 'package:verifeye/widgets/buttons/authentication_button.dart';
+import 'package:verifeye/widgets/custom%20fields/custom_text_field.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
