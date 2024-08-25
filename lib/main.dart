@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:verifeye/bloc/account_bloc/account_bloc.dart';
 import 'package:verifeye/bloc/authentication%20blocs/change_password_bloc/change_password_bloc.dart';
+import 'package:verifeye/bloc/authentication%20blocs/delete_account_bloc/delete_account_bloc.dart';
 import 'package:verifeye/bloc/authentication%20blocs/forgot_password_bloc/forgot_password_bloc.dart';
 import 'package:verifeye/bloc/main_bloc/main_bloc.dart';
 import 'package:verifeye/bloc/authentication%20blocs/sign_in_bloc/sign_in_bloc.dart';
@@ -53,6 +54,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => MainBloc(),
+        ),
+        BlocProvider(
+          create: (context) => DeleteAccountBloc(),
         ),
       ],
       child: MaterialApp(

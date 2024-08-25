@@ -28,4 +28,14 @@ class FirebaseStorageService {
     await reference.delete();
     return true;
   }
+
+  Future<void> deleteImageFolder(String folderPath) async {
+    final storageRef = FirebaseStorage.instance.ref();
+
+    final ListResult result = await storageRef.child(folderPath).listAll();
+
+    for (var fileRef in result.items) {
+      await fileRef.delete();
+    }
+  }
 }

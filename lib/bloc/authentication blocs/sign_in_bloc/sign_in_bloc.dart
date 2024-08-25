@@ -19,6 +19,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<UserSignInEvent>(userSignIn);
     on<UserSignOutEvent>(userSignOut);
     on<ResendVerificationEmailEvent>(resendVerificationEmail);
+    on<ResetStateEvent>(resetState);
   }
   final AuthService authService = GetIt.I<AuthService>();
 
@@ -65,4 +66,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     await authService.signOut();
     event.onSuccess?.call();
   }
+
+  resetState(ResetStateEvent event, Emitter<SignInState> emit) {}
 }

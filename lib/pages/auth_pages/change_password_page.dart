@@ -8,8 +8,8 @@ import 'package:verifeye/bloc/authentication%20blocs/change_password_bloc/change
 import 'package:verifeye/core/global_values/global_values.dart';
 import 'package:verifeye/helpers/dialogs/adaptive_dialog.dart';
 import 'package:verifeye/pages/auth_pages/password_changed_animated_page.dart';
-import 'package:verifeye/widgets/authentication_button.dart';
-import 'package:verifeye/widgets/custom_text_field.dart';
+import 'package:verifeye/widgets/buttons/authentication_button.dart';
+import 'package:verifeye/widgets/custom%20fields/custom_text_field.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});

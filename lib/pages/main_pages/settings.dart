@@ -8,8 +8,9 @@ import 'package:verifeye/bloc/account_bloc/account_state.dart';
 import 'package:verifeye/core/global_values/global_values.dart';
 import 'package:verifeye/helpers/dialogs/change_profile_pic_dialog.dart';
 import 'package:verifeye/pages/auth_pages/change_password_page.dart';
-import 'package:verifeye/pages/main_pages/edit_profile/edit_profile.dart';
-import 'package:verifeye/widgets/settings_option.dart';
+import 'package:verifeye/pages/auth_pages/delete_account_page.dart';
+import 'package:verifeye/pages/edit_profile/edit_profile.dart';
+import 'package:verifeye/widgets/settings%20widget/settings_option.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -20,6 +21,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   ChangeProfilePicDialog showDialog = ChangeProfilePicDialog();
+
   @override
   void didChangeDependencies() {
     BlocProvider.of<AccountBloc>(context).add(
@@ -43,42 +45,7 @@ class _SettingsPageState extends State<SettingsPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                state.user != null
-                    ? Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          photoWidget(state),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          SizedBox(
-                            width: screenWidth - 150,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '${state.user!.firstName} ${state.user!.lastName}',
-                                  style: Theme.of(context)
-                                      .primaryTextTheme
-                                      .bodyLarge,
-                                ),
-                                Text(
-                                  state.user!.email,
-                                  overflow: TextOverflow.fade,
-                                  softWrap: false,
-                                  style: Theme.of(context)
-                                      .primaryTextTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                        color: AppColors.black,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      )
-                    : const SizedBox(),
+                userPhotoAndNameWidget(state),
                 const SizedBox(
                   height: 60,
                 ),
@@ -116,9 +83,18 @@ class _SettingsPageState extends State<SettingsPage> {
                   icon: Icons.person_2_outlined,
                   title: 'Privacy policy',
                 ),
-                const SettingsOption(
-                  icon: Icons.person_2_outlined,
-                  title: 'Delete account',
+                TouchRippleEffect(
+                  rippleColor: AppColors.mint.withOpacity(0.5),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DeleteAccountPage(),
+                    ),
+                  ),
+                  child: const SettingsOption(
+                    icon: Icons.person_2_outlined,
+                    title: 'Delete account',
+                  ),
                 ),
               ],
             ),
@@ -126,6 +102,43 @@ class _SettingsPageState extends State<SettingsPage> {
         );
       }),
     );
+  }
+
+  Widget userPhotoAndNameWidget(AccountState state) {
+    return state.user != null
+        ? Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              photoWidget(state),
+              const SizedBox(
+                width: 10,
+              ),
+              SizedBox(
+                width: screenWidth - 150,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${state.user!.firstName} ${state.user!.lastName}',
+                      style: Theme.of(context).primaryTextTheme.bodyLarge,
+                    ),
+                    Text(
+                      state.user!.email,
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
+                      style: Theme.of(context)
+                          .primaryTextTheme
+                          .bodyMedium!
+                          .copyWith(
+                            color: AppColors.black,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )
+        : const SizedBox();
   }
 
   Widget photoWidget(AccountState state) {

@@ -11,8 +11,8 @@ import 'package:verifeye/helpers/dialogs/adaptive_dialog.dart';
 import 'package:verifeye/pages/auth_pages/forgot_password_page.dart';
 import 'package:verifeye/pages/main_pages/navigation.dart';
 import 'package:verifeye/pages/auth_pages/sign_up_page.dart';
-import 'package:verifeye/widgets/authentication_button.dart';
-import 'package:verifeye/widgets/custom_text_field.dart';
+import 'package:verifeye/widgets/buttons/authentication_button.dart';
+import 'package:verifeye/widgets/custom%20fields/custom_text_field.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});

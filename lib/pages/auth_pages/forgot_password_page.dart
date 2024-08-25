@@ -7,8 +7,8 @@ import 'package:verifeye/bloc/authentication%20blocs/forgot_password_bloc/forgot
 import 'package:verifeye/bloc/authentication%20blocs/forgot_password_bloc/forgot_password_state.dart';
 import 'package:verifeye/core/global_values/global_values.dart';
 import 'package:verifeye/helpers/dialogs/adaptive_dialog.dart';
-import 'package:verifeye/widgets/authentication_button.dart';
-import 'package:verifeye/widgets/custom_text_field.dart';
+import 'package:verifeye/widgets/buttons/authentication_button.dart';
+import 'package:verifeye/widgets/custom%20fields/custom_text_field.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
