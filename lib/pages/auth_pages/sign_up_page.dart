@@ -22,8 +22,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    double bottomHeight = MediaQuery.of(context).viewInsets.bottom;
-
     return PopScope(
       onPopInvokedWithResult: (bool didPop, Object? result) {
         if (didPop) {
@@ -46,17 +44,15 @@ class _SignUpPageState extends State<SignUpPage> {
         body: Container(
           height: screenHeight,
           color: AppColors.gray.withOpacity(0.1),
-          padding: const EdgeInsets.only(
+          padding: EdgeInsets.only(
             right: 32,
             left: 32,
+            bottom: safeAreaBottom,
           ),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: (screenHeight / 14) - (bottomHeight / 7),
-                ),
                 Column(
                   children: [
                     Text(
@@ -81,59 +77,48 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget fieldsAdnButtonWidget(double height) {
     return BlocBuilder<SignUpBloc, SignUpState>(builder: (context, state) {
-      return Column(
-        children: [
-          const SizedBox(
-            height: 50,
-          ),
-          CustomTextFieldWidget(
-            hintText: 'Enter your username',
-            labelText: 'Email',
-            formControl: state.form.emailControl,
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          CustomTextFieldWidget(
-            hintText: 'Enter your name',
-            labelText: 'First name',
-            formControl: state.form.firstNameControl,
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          CustomTextFieldWidget(
-            hintText: 'Enter your surname',
-            labelText: 'Last name',
-            formControl: state.form.lastNameControl,
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          CustomTextFieldWidget(
-            hintText: 'Enter your password',
-            labelText: 'Password',
-            formControl: state.form.passwordControl,
-            // obscureText: true,
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          CustomTextFieldWidget(
-            hintText: 'Enter your password',
-            labelText: 'Confirm password',
-            formControl: state.form.confirmPasswordControl,
-            // obscureText: true,
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          checkBoxWidget(state),
-          const SizedBox(
-            height: 30,
-          ),
-          signUpButtonWidget(state.loading),
-        ],
+      return SizedBox(
+        height: screenHeight - safeAreaBottom - safeAreaTop - 150,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(
+              height: 40,
+            ),
+            CustomTextFieldWidget(
+              hintText: 'Enter your username',
+              labelText: 'Email',
+              formControl: state.form.emailControl,
+            ),
+            CustomTextFieldWidget(
+              hintText: 'Enter your name',
+              labelText: 'First name',
+              formControl: state.form.firstNameControl,
+            ),
+            CustomTextFieldWidget(
+              hintText: 'Enter your surname',
+              labelText: 'Last name',
+              formControl: state.form.lastNameControl,
+            ),
+            CustomTextFieldWidget(
+              hintText: 'Enter your password',
+              labelText: 'Password',
+              formControl: state.form.passwordControl,
+              obscureText: true,
+            ),
+            CustomTextFieldWidget(
+              hintText: 'Enter your password',
+              labelText: 'Confirm password',
+              formControl: state.form.confirmPasswordControl,
+              obscureText: true,
+            ),
+            checkBoxWidget(state),
+            const SizedBox(
+              height: 20,
+            ),
+            signUpButtonWidget(state.loading),
+          ],
+        ),
       );
     });
   }

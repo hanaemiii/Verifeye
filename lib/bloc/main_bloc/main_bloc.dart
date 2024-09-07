@@ -6,16 +6,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:verifeye/bloc/main_bloc/main_event.dart';
 import 'package:verifeye/bloc/main_bloc/main_state.dart';
 import 'package:verifeye/core/firebase_services/firebase_storage.dart';
+import 'package:verifeye/core/firebase_services/firestore_database.dart';
 import 'package:verifeye/helpers/functions/generate_image_name.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
   MainBloc()
       : super(
-          const MainState(
-            file: null,
-          ),
+          const MainState(),
         ) {
     on<ChoosePhotoEvent>(choosePhoto);
+    on<GetUserEvent>(getUser);
+    on<UserEvent>(user);
     on<DeleteSelectedPhotoEvent>(
       (event, emit) => emit(
         state.copyWithFile(
@@ -24,10 +25,13 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       ),
     );
     on<SendToStorageEvent>(sendToStorage);
+    on<ResetHomePageEvent>(resetHomePage);
   }
   final FirebaseStorageService firebaseStorageService =
       GetIt.I<FirebaseStorageService>();
   GenerateImageName generateImageName = GenerateImageName();
+  final FirestoreDatabaseService firestoreDatabaseService =
+      GetIt.I<FirestoreDatabaseService>();
 
   Future<void> choosePhoto(
       ChoosePhotoEvent event, Emitter<MainState> emit) async {
@@ -56,5 +60,29 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       imageName,
     );
     // pass this url to user
+  }
+
+  getUser(GetUserEvent event, Emitter<MainState> emit) {
+    firestoreDatabaseService.getCurrentUser().listen(
+      (user) {
+        add(
+          UserEvent(user),
+        );
+      },
+    );
+  }
+
+  user(UserEvent event, Emitter<MainState> emit) {
+    emit(
+      state.copyWith(
+        user: event.user,
+      ),
+    );
+  }
+
+  resetHomePage(ResetHomePageEvent event, Emitter<MainState> emit) {
+    emit(
+      const MainState(),
+    );
   }
 }

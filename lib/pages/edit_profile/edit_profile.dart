@@ -43,7 +43,7 @@ class _EditProfileState extends State<EditProfile> {
           ),
           shape: const Border(
             bottom: BorderSide(
-              color: AppColors.mint,
+              color: AppColors.backgroundViolet,
             ),
           ),
           title: Text(

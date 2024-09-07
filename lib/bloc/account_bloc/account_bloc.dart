@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,9 +15,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   AccountBloc()
       : super(
           AccountState(
-            file: null,
-            user: null,
-            controller: null,
             form: ChangeNameForm(),
             loading: false,
           ),
@@ -30,6 +28,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<DeletePhotoEvent>(deletePhoto);
     on<ChangeNameEvent>(changeName);
     on<ClearStateFileEvent>(clearStateFile);
+    on<ResetAccountPageEvent>(resetAccountPage);
   }
   final FirestoreDatabaseService firestoreDatabaseService =
       GetIt.I<FirestoreDatabaseService>();
@@ -73,23 +72,28 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   Future<void> openCamera(
       OpenCameraEvent event, Emitter<AccountState> emit) async {
     // get available cameras
-    final cameras = await availableCameras();
-    // get a camera controller
-    final cameraController = CameraController(
-      event.isFlipped ? cameras[1] : cameras[0],
-      ResolutionPreset.high,
-      imageFormatGroup: ImageFormatGroup.jpeg,
-    );
+    try {
+      final cameras = await availableCameras();
+      // get a camera controller
+      final cameraController = CameraController(
+        event.isFlipped ? cameras[1] : cameras[0],
+        ResolutionPreset.high,
+        imageFormatGroup: ImageFormatGroup.jpeg,
+      );
+      // initialize camera
+      await cameraController.initialize();
+      await cameraController.lockCaptureOrientation();
 
-    // initialize camera
-    await cameraController.initialize();
-    await cameraController.lockCaptureOrientation();
-
-    emit(
-      state.copyWith(
-        controller: cameraController,
-      ),
-    );
+      emit(
+        state.copyWith(
+          controller: cameraController,
+        ),
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
   }
 
   Future<void> takePicture(
@@ -188,6 +192,15 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     emit(
       state.copyWithFile(
         file: null,
+      ),
+    );
+  }
+
+  resetAccountPage(ResetAccountPageEvent event, Emitter<AccountState> emit) {
+    emit(
+      AccountState(
+        form: ChangeNameForm(),
+        loading: false,
       ),
     );
   }

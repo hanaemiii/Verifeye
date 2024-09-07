@@ -98,7 +98,7 @@ class _CameraScreenState extends State<CameraScreen> {
         } else {
           return const Center(
             child: CircularProgressIndicator(
-              color: AppColors.mint,
+              color: AppColors.violet,
             ),
           );
         }

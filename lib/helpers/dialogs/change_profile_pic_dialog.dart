@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:touch_ripple_effect/touch_ripple_effect.dart';
@@ -54,7 +55,7 @@ class ChangeProfilePicDialog {
     BuildContext context,
   ) {
     return TouchRippleEffect(
-      rippleColor: AppColors.mint.withOpacity(0.5),
+      rippleColor: AppColors.violet.withOpacity(0.5),
       onTap: () {
         Navigator.push(
           context,
@@ -65,9 +66,9 @@ class ChangeProfilePicDialog {
       },
       child: Row(
         children: [
-          // const Icon(
-          //  // .takePhoto,
-          // ),
+          const Icon(
+            CupertinoIcons.camera,
+          ),
           const SizedBox(
             width: 16,
           ),
@@ -86,7 +87,7 @@ class ChangeProfilePicDialog {
     BuildContext context,
   ) {
     return TouchRippleEffect(
-      rippleColor: AppColors.mint.withOpacity(0.5),
+      rippleColor: AppColors.backgroundViolet.withOpacity(0.5),
       onTap: () {
         BlocProvider.of<AccountBloc>(context).add(
           DeletePhotoEvent(),
@@ -96,10 +97,10 @@ class ChangeProfilePicDialog {
       },
       child: Row(
         children: [
-          // const Icon(
-          //   .delete,
-          //   color: Color(0xFFFF0000),
-          // ),
+          const Icon(
+            CupertinoIcons.delete,
+            color: Color(0xFFFF0000),
+          ),
           const SizedBox(
             width: 16,
           ),
@@ -118,7 +119,7 @@ class ChangeProfilePicDialog {
     BuildContext context,
   ) {
     return TouchRippleEffect(
-      rippleColor: AppColors.mint.withOpacity(0.5),
+      rippleColor: AppColors.violet.withOpacity(0.5),
       onTap: () {
         BlocProvider.of<AccountBloc>(context).add(
           ChooseProfilePhotoEvent(),
@@ -128,9 +129,9 @@ class ChangeProfilePicDialog {
       },
       child: Row(
         children: [
-          // const Icon(
-          //   .permMedia,
-          // ),
+          const Icon(
+            CupertinoIcons.photo_on_rectangle,
+          ),
           const SizedBox(
             width: 16,
           ),

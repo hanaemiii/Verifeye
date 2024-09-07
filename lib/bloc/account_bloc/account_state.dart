@@ -12,9 +12,9 @@ class AccountState extends Equatable {
   final bool loading;
 
   const AccountState({
-    required this.file,
-    required this.user,
-    required this.controller,
+    this.file,
+    this.user,
+    this.controller,
     required this.form,
     required this.loading,
   });

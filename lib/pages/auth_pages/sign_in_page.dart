@@ -27,7 +27,6 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     double bottomHeight = MediaQuery.of(context).viewInsets.bottom;
-
     return Scaffold(
       body: Container(
         height: screenHeight,
@@ -77,7 +76,7 @@ class _SignInPageState extends State<SignInPage> {
             hintText: 'Enter your password',
             labelText: 'Password',
             formControl: state.signInForm.passwordControl,
-            // obscureText: true,
+            obscureText: true,
           ),
           const SizedBox(
             height: 10,
@@ -130,13 +129,13 @@ class _SignInPageState extends State<SignInPage> {
             );
           },
           onSuccess: () {
-            Navigator.pushReplacement(
-              context,
+            Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                 builder: (context) => const NavigationPage(
                   selectedPage: NavigationPages.home,
                 ),
               ),
+              (_) => false,
             );
           },
         ),

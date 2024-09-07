@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:verifeye/core/global_values/global_values.dart';
 import 'package:verifeye/enums/enum.dart';
 import 'package:verifeye/pages/main_pages/home.dart';
 import 'package:verifeye/helpers/functions/navigate.dart';
 import 'package:verifeye/pages/main_pages/search.dart';
-import 'package:verifeye/pages/main_pages/settings.dart';
+import 'package:verifeye/pages/main_pages/account.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({
@@ -40,7 +41,7 @@ class _NavigationPagestate extends State<NavigationPage> {
     List pages = [
       const HomePage(),
       const SearchPage(),
-      const SettingsPage(),
+      const AccountPage(),
     ];
     return PopScope(
       canPop: false,
@@ -70,21 +71,21 @@ class _NavigationPagestate extends State<NavigationPage> {
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.abc,
+                    CupertinoIcons.home,
                   ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.abc,
+                    CupertinoIcons.globe,
                   ),
                   label: 'Search',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.abc,
+                    CupertinoIcons.person,
                   ),
-                  label: 'Settings ',
+                  label: 'Account ',
                 ),
               ],
               currentIndex: selectedIndex!,

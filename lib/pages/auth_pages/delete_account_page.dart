@@ -34,7 +34,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
         ),
         shape: const Border(
           bottom: BorderSide(
-            color: AppColors.mint,
+            color: AppColors.backgroundViolet,
           ),
         ),
         title: Text(
@@ -95,6 +95,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
             labelText: 'Current Password',
             hintText: 'Enter Password',
             formControl: formControl,
+            obscureText: true,
           ),
           const SizedBox(
             height: 15,

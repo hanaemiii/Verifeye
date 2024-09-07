@@ -17,9 +17,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           ),
         ) {
     on<UserSignInEvent>(userSignIn);
-    on<UserSignOutEvent>(userSignOut);
     on<ResendVerificationEmailEvent>(resendVerificationEmail);
-    on<ResetStateEvent>(resetState);
   }
   final AuthService authService = GetIt.I<AuthService>();
 
@@ -39,6 +37,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
         if (response is DataSuccess) {
           event.onSuccess?.call();
+          state.signInForm.clear();
         } else {
           event.onError?.call(response.exception!);
         }
@@ -60,12 +59,4 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     }
     event.onSuccess?.call();
   }
-
-  Future<void> userSignOut(
-      UserSignOutEvent event, Emitter<SignInState> emit) async {
-    await authService.signOut();
-    event.onSuccess?.call();
-  }
-
-  resetState(ResetStateEvent event, Emitter<SignInState> emit) {}
 }

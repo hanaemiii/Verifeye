@@ -33,3 +33,5 @@ class ChangeNameEvent extends AccountEvent {
 }
 
 class ClearStateFileEvent extends AccountEvent {}
+
+class ResetAccountPageEvent extends AccountEvent {}

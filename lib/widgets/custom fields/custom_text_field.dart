@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -94,7 +95,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
             child: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: const BorderSide(
-                color: AppColors.greenCyan,
+                color: AppColors.violet,
                 width: 2,
               ),
             ),
@@ -147,9 +148,9 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
             obscureText = !obscureText;
           });
         },
-        // child: Icon(
-        //   // obscureText ? WoloIcons.eyeOff : WoloIcons.eye,
-        // ),
+        child: Icon(
+          obscureText ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
+        ),
       );
     }
 

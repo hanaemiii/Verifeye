@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:verifeye/base/icons/verifeye_icons_icons.dart';
 import 'package:verifeye/base/theme/colors.dart';
 
 class SettingsOption extends StatefulWidget {
@@ -30,8 +32,11 @@ class _SettingsOptionState extends State<SettingsOption> {
                 children: [
                   Icon(
                     widget.icon,
-                    color: AppColors.mint,
-                    size: 25,
+                    color: AppColors.violet,
+                    size: widget.icon == VerifeyeIcons.legal ||
+                            widget.icon == VerifeyeIcons.privace
+                        ? 20
+                        : 25,
                   ),
                   const SizedBox(
                     width: 15,
@@ -48,9 +53,9 @@ class _SettingsOptionState extends State<SettingsOption> {
                 ],
               ),
               const Icon(
-                Icons.chevron_right_outlined,
-                size: 35,
-                color: AppColors.greenCyan,
+                CupertinoIcons.chevron_forward,
+                size: 30,
+                color: AppColors.backgroundViolet,
               )
             ],
           ),

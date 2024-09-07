@@ -36,7 +36,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         ),
         shape: const Border(
           bottom: BorderSide(
-            color: AppColors.mint,
+            color: AppColors.backgroundViolet,
           ),
         ),
         title: Text(
@@ -86,6 +86,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 hintText: 'Enter current password',
                 labelText: 'Current password',
                 formControl: state.form.currentPasswordControl,
+                obscureText: true,
               ),
               const SizedBox(
                 height: 20,
@@ -94,6 +95,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 hintText: 'Enter new password',
                 labelText: 'New password',
                 formControl: state.form.newPasswordControl,
+                obscureText: true,
               ),
               const SizedBox(
                 height: 20,
@@ -102,6 +104,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 hintText: 'Rewrite new password',
                 labelText: 'Confirm password',
                 formControl: state.form.confirmPasswordControl,
+                obscureText: true,
               ),
               const SizedBox(
                 height: 30,

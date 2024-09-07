@@ -69,6 +69,7 @@ class _AuthenticationButtonState extends State<AuthenticationButton> {
                 child: Center(
                   child: Text(
                     widget.buttonName,
+                    textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .primaryTextTheme
                         .headlineSmall!

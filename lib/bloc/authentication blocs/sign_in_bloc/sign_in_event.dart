@@ -14,18 +14,9 @@ class UserSignInEvent extends SignInEvent {
   });
 }
 
-class UserSignOutEvent extends SignInEvent {
-  final void Function()? onSuccess;
-  UserSignOutEvent({
-    required this.onSuccess,
-  });
-}
-
 class ResendVerificationEmailEvent extends SignInEvent {
   final void Function()? onSuccess;
   ResendVerificationEmailEvent({
     required this.onSuccess,
   });
 }
-
-class ResetStateEvent extends SignInEvent {}
