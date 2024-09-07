@@ -1,6 +1,14 @@
+import 'package:verifeye/models/searched_link_model.dart';
+
 class SearchEvent {}
 
 class CheckUrlEvent extends SearchEvent {
-  final String value;
-  CheckUrlEvent({required this.value});
+  CheckUrlEvent();
 }
+
+class GetLinkEvent extends SearchEvent {
+  final SearchedLink? link;
+  GetLinkEvent({required this.link});
+}
+
+class CleanStateEvent extends SearchEvent {}

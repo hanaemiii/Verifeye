@@ -6,14 +6,19 @@ import 'package:verifeye/bloc/search/search_bloc.dart';
 import 'package:verifeye/bloc/search/search_event.dart';
 
 class SearchBarWidget extends StatefulWidget {
-  const SearchBarWidget({super.key});
+  const SearchBarWidget({
+    super.key,
+    required this.controller,
+    required this.disabled,
+  });
+  final TextEditingController controller;
+  final bool disabled;
 
   @override
   State<SearchBarWidget> createState() => _SearchBarWidgetState();
 }
 
 class _SearchBarWidgetState extends State<SearchBarWidget> {
-  final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
   @override
@@ -42,12 +47,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           Expanded(
             flex: 3,
             child: TextField(
-              controller: _controller,
+              controller: widget.controller,
               focusNode: _focusNode,
               decoration: const InputDecoration(
                 hintText: 'Search URL',
                 labelText: 'Search',
-                // prefixIcon: Icon(CupertinoIcons.search),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
               ),
@@ -60,7 +64,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             child: Container(
               height: 60,
               decoration: BoxDecoration(
-                color: AppColors.backgroundViolet.withOpacity(0.7),
+                color: widget.disabled
+                    ? AppColors.backgroundViolet.withOpacity(0.3)
+                    : AppColors.backgroundViolet.withOpacity(0.7),
                 borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(14),
                   bottomRight: Radius.circular(14),
@@ -72,24 +78,16 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    BlocProvider.of<SearchBloc>(context).add(
-                      CheckUrlEvent(
-                        value: _controller.text,
-                      ),
-                    );
-                    _controller.clear();
+                    widget.disabled
+                        ? null
+                        : BlocProvider.of<SearchBloc>(context).add(
+                            CheckUrlEvent(),
+                          );
                   }),
             ),
           ),
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    _focusNode.dispose();
-    super.dispose();
   }
 }

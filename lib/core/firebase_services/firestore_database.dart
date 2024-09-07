@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:verifeye/models/searched_link_model.dart';
 import 'package:verifeye/models/user_model.dart';
 
 class FirestoreDatabaseService {
   final User currentUser = FirebaseAuth.instance.currentUser!;
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Stream<AppUser?> getCurrentUser() {
     AppUser? user;
@@ -25,23 +27,6 @@ class FirestoreDatabaseService {
       },
     );
   }
-  // get current user
-  // Stream<AppUser?> getCurrentUser() {
-  //   final DocumentReference<Map<String, dynamic>> docRef =
-  //       FirebaseFirestore.instance.collection('users').doc(currentUser!.uid);
-  //       print('object');
-  //   print(currentUser!.displayName);
-
-  //   return docRef.snapshots().map(
-  //     (event) {
-  //       if (event.data() == null) {
-  //         return null;
-  //       }
-  //       final Map<String, dynamic> dataMap = event.data()!;
-  //       return AppUser.fromMap(dataMap);
-  //     },
-  //   );
-  // }
 
   // change user info
   Future<void> updateUserInfo(AppUser user) async {
@@ -53,5 +38,32 @@ class FirestoreDatabaseService {
   // delete user from users collection
   Future<void> deleteUser(String userUId) async {
     await FirebaseFirestore.instance.collection('users').doc(userUId).delete();
+  }
+
+  // set link to db
+  Future<void> setLink(SearchedLink link) async {
+    // get current user uid
+    String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+    await _db.collection('links').doc(currentUserUid).set(
+          link.toMap(),
+        );
+  }
+
+  Stream<SearchedLink?> getLink(String url) {
+    SearchedLink? link;
+    // get current user map
+    final result = FirebaseFirestore.instance
+        .collection('links')
+        .where('url', isEqualTo: url);
+
+    return result.snapshots().map(
+      (snapshot) {
+        for (final doc in snapshot.docs) {
+          final Map<String, dynamic> dataMap = doc.data();
+          link = SearchedLink.fromMap(dataMap);
+        }
+        return link;
+      },
+    );
   }
 }
