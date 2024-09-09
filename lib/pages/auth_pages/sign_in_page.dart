@@ -13,6 +13,7 @@ import 'package:verifeye/pages/main_pages/navigation.dart';
 import 'package:verifeye/pages/auth_pages/sign_up_page.dart';
 import 'package:verifeye/widgets/buttons/authentication_button.dart';
 import 'package:verifeye/widgets/custom%20fields/custom_text_field.dart';
+import 'package:verifeye/widgets/settings%20widget/terms_and_privacy_widget.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -34,26 +35,36 @@ class _SignInPageState extends State<SignInPage> {
         padding: EdgeInsets.only(
           right: 32,
           left: 32,
-          bottom: bottomHeight == 0 ? screenHeight / 4 : 0,
+          bottom: bottomHeight == 0 ? screenHeight / 20 : 0,
           top: (screenHeight / 5) - (bottomHeight / 4),
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Sign In',
-                style:
-                    Theme.of(context).primaryTextTheme.displayMedium!.copyWith(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Sign In',
+                    style: Theme.of(context)
+                        .primaryTextTheme
+                        .displayMedium!
+                        .copyWith(
                           fontSize: 40,
                         ),
+                  ),
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  fieldsAndButtonWidget(),
+                ],
               ),
-              const SizedBox(
-                height: 100,
-              ),
-              fieldsAndButtonWidget(),
-            ],
-          ),
+            ),
+            const TermsAndPrivacyWidget(
+              textColor: 0xD9000000,
+            ),
+          ],
         ),
       ),
     );

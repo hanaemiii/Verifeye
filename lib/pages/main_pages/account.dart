@@ -14,6 +14,8 @@ import 'package:verifeye/helpers/dialogs/change_profile_pic_dialog.dart';
 import 'package:verifeye/pages/auth_pages/change_password_page.dart';
 import 'package:verifeye/pages/auth_pages/delete_account_page.dart';
 import 'package:verifeye/pages/auth_pages/sign_in_page.dart';
+import 'package:verifeye/pages/conditions_pages/privacy_policy.dart';
+import 'package:verifeye/pages/conditions_pages/terms_conditions.dart';
 import 'package:verifeye/pages/edit_profile/edit_profile.dart';
 import 'package:verifeye/widgets/settings%20widget/settings_option.dart';
 
@@ -80,13 +82,31 @@ class _AccountPageState extends State<AccountPage> {
                     title: 'Change password',
                   ),
                 ),
-                const SettingsOption(
-                  icon: VerifeyeIcons.legal,
-                  title: 'Terms and conditions',
+                TouchRippleEffect(
+                  rippleColor: AppColors.violet.withOpacity(0.5),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TermsConditionsPage(),
+                    ),
+                  ),
+                  child: const SettingsOption(
+                    icon: VerifeyeIcons.legal,
+                    title: 'Terms and conditions',
+                  ),
                 ),
-                const SettingsOption(
-                  icon: VerifeyeIcons.privace,
-                  title: 'Privacy policy',
+                TouchRippleEffect(
+                  rippleColor: AppColors.violet.withOpacity(0.5),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PrivacyPolicyPage(),
+                    ),
+                  ),
+                  child: const SettingsOption(
+                    icon: VerifeyeIcons.privace,
+                    title: 'Privacy policy',
+                  ),
                 ),
                 TouchRippleEffect(
                   rippleColor: AppColors.violet.withOpacity(0.5),

@@ -6,6 +6,8 @@ import 'package:verifeye/bloc/authentication%20blocs/sign_up_bloc/sign_up_event.
 import 'package:verifeye/bloc/authentication%20blocs/sign_up_bloc/sign_up_state.dart';
 import 'package:verifeye/core/global_values/global_values.dart';
 import 'package:verifeye/helpers/dialogs/adaptive_dialog.dart';
+import 'package:verifeye/pages/conditions_pages/privacy_policy.dart';
+import 'package:verifeye/pages/conditions_pages/terms_conditions.dart';
 import 'package:verifeye/widgets/buttons/authentication_button.dart';
 import 'package:verifeye/widgets/custom%20fields/custom_check_box.dart';
 import 'package:verifeye/widgets/custom%20fields/custom_text_field.dart';
@@ -180,8 +182,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          const Placeholder(), //TermsConditionPage(),
+                      builder: (context) => const TermsConditionsPage(),
                     ),
                   );
                 },
@@ -204,8 +205,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          const Placeholder(), //PrivacyPolicyPage(),
+                      builder: (context) => const PrivacyPolicyPage(),
                     ),
                   );
                 },
