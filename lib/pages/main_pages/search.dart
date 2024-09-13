@@ -130,8 +130,7 @@ class _SearchPageState extends State<SearchPage> with WidgetsBindingObserver {
           title: 'All clear!',
           icon: Icons.verified,
         );
-
-      default:
+      case 'Invalid':
         return answerWidget(
           initialTextStyle: textStyle,
           link: link,
@@ -140,6 +139,12 @@ class _SearchPageState extends State<SearchPage> with WidgetsBindingObserver {
               'The link appears to be unsafe. Proceed with caution or consider avoiding it.',
           title: 'Warning:',
           icon: Icons.warning,
+        );
+      default:
+        return Center(
+          child: CircularProgressIndicator(
+            color: AppColors.backgroundViolet.withOpacity(0.7),
+          ),
         );
     }
   }
