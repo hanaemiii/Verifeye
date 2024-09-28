@@ -11,6 +11,8 @@ class ChangeProfilePicDialog {
   void changePic(
     BuildContext context,
   ) {
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+    AccountBloc accountBloc = BlocProvider.of<AccountBloc>(context);
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -29,19 +31,24 @@ class ChangeProfilePicDialog {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 takePhotoWidget(
-                  context,
+                  context: context,
+                  primaryTextTheme: primaryTextTheme,
                 ),
                 const SizedBox(
                   height: 16,
                 ),
                 openGalleryWidget(
-                  context,
+                  context: context,
+                  primaryTextTheme: primaryTextTheme,
+                  accountBloc: accountBloc,
                 ),
                 const SizedBox(
                   height: 16,
                 ),
                 deletePhotoWidget(
-                  context,
+                  context: context,
+                  primaryTextTheme: primaryTextTheme,
+                  accountBloc: accountBloc,
                 ),
               ],
             ),
@@ -51,9 +58,10 @@ class ChangeProfilePicDialog {
     );
   }
 
-  Widget takePhotoWidget(
-    BuildContext context,
-  ) {
+  Widget takePhotoWidget({
+    required BuildContext context,
+    required TextTheme primaryTextTheme,
+  }) {
     return TouchRippleEffect(
       rippleColor: AppColors.violet.withOpacity(0.5),
       onTap: () {
@@ -74,22 +82,24 @@ class ChangeProfilePicDialog {
           ),
           Text(
             'Take a photo',
-            style: Theme.of(context).primaryTextTheme.bodyMedium!.copyWith(
-                  color: AppColors.black,
-                ),
+            style: primaryTextTheme.bodyMedium!.copyWith(
+              color: AppColors.black,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget deletePhotoWidget(
-    BuildContext context,
-  ) {
+  Widget deletePhotoWidget({
+    required BuildContext context,
+    required TextTheme primaryTextTheme,
+    required AccountBloc accountBloc,
+  }) {
     return TouchRippleEffect(
       rippleColor: AppColors.backgroundViolet.withOpacity(0.5),
       onTap: () {
-        BlocProvider.of<AccountBloc>(context).add(
+        accountBloc.add(
           DeletePhotoEvent(),
         );
 
@@ -106,22 +116,24 @@ class ChangeProfilePicDialog {
           ),
           Text(
             'Delete photo',
-            style: Theme.of(context).primaryTextTheme.bodyMedium!.copyWith(
-                  color: const Color(0xFFFF0000),
-                ),
+            style: primaryTextTheme.bodyMedium!.copyWith(
+              color: const Color(0xFFFF0000),
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget openGalleryWidget(
-    BuildContext context,
-  ) {
+  Widget openGalleryWidget({
+    required BuildContext context,
+    required TextTheme primaryTextTheme,
+    required AccountBloc accountBloc,
+  }) {
     return TouchRippleEffect(
       rippleColor: AppColors.violet.withOpacity(0.5),
       onTap: () {
-        BlocProvider.of<AccountBloc>(context).add(
+        accountBloc.add(
           ChooseProfilePhotoEvent(),
         );
 
@@ -137,9 +149,9 @@ class ChangeProfilePicDialog {
           ),
           Text(
             'Open gallery',
-            style: Theme.of(context).primaryTextTheme.bodyMedium!.copyWith(
-                  color: AppColors.black,
-                ),
+            style: primaryTextTheme.bodyMedium!.copyWith(
+              color: AppColors.black,
+            ),
           ),
         ],
       ),

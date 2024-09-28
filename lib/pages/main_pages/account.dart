@@ -131,6 +131,8 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   Widget logOutWidget() {
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+
     return TouchRippleEffect(
       rippleColor: AppColors.violet.withOpacity(0.5),
       onTap: () => BlocProvider.of<LogOutBloc>(context).add(
@@ -161,11 +163,11 @@ class _AccountPageState extends State<AccountPage> {
             ),
             Text(
               'Log out',
-              style: Theme.of(context).primaryTextTheme.bodyMedium!.copyWith(
-                    color: AppColors.black,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                  ),
+              style: primaryTextTheme.bodyMedium!.copyWith(
+                color: AppColors.black,
+                fontWeight: FontWeight.w600,
+                fontSize: 20,
+              ),
             ),
           ],
         ),
@@ -174,6 +176,8 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   Widget userPhotoAndNameWidget(AccountState state) {
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+
     return state.user != null
         ? Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -189,18 +193,15 @@ class _AccountPageState extends State<AccountPage> {
                   children: [
                     Text(
                       '${state.user!.firstName} ${state.user!.lastName}',
-                      style: Theme.of(context).primaryTextTheme.bodyLarge,
+                      style: primaryTextTheme.bodyLarge,
                     ),
                     Text(
                       state.user!.email,
                       overflow: TextOverflow.fade,
                       softWrap: false,
-                      style: Theme.of(context)
-                          .primaryTextTheme
-                          .bodyMedium!
-                          .copyWith(
-                            color: AppColors.black,
-                          ),
+                      style: primaryTextTheme.bodyMedium!.copyWith(
+                        color: AppColors.black,
+                      ),
                     ),
                   ],
                 ),
@@ -216,12 +217,13 @@ class _AccountPageState extends State<AccountPage> {
         width: 100.0,
         height: 100.0,
         decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: AppColors.white,
-            border: Border.all(
-              width: 2,
-              color: AppColors.backgroundViolet,
-            )),
+          shape: BoxShape.circle,
+          color: AppColors.white,
+          border: Border.all(
+            width: 2,
+            color: AppColors.backgroundViolet,
+          ),
+        ),
         child: state.user!.photoUrl == null
             ? const Icon(
                 Icons.person,

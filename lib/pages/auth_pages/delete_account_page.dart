@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:verifeye/base/theme/colors.dart';
 import 'package:verifeye/bloc/authentication%20blocs/delete_account_bloc/delete_account_bloc.dart';
@@ -23,6 +22,8 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
 
   @override
   Widget build(BuildContext context) {
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -39,7 +40,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
         ),
         title: Text(
           'Delete Account',
-          style: Theme.of(context).primaryTextTheme.headlineMedium,
+          style: primaryTextTheme.headlineMedium,
         ),
       ),
       body: BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
@@ -56,13 +57,9 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
                   child: Text(
                     'Delete my account',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .primaryTextTheme
-                        .displayMedium!
-                        .copyWith(
-                          fontFamily: GoogleFonts.sen().fontFamily,
-                          fontSize: 40,
-                        ),
+                    style: primaryTextTheme.displayMedium!.copyWith(
+                      fontSize: 40,
+                    ),
                   ),
                 ),
               ),
@@ -73,6 +70,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
                   isChecked: state.checked,
                   isLoading: state.loading,
                   formControl: state.form.currentPasswordControl,
+                  primaryTextTheme: primaryTextTheme,
                 ),
               ),
             ],
@@ -87,6 +85,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
     required bool isChecked,
     required bool isLoading,
     required FormControl<String> formControl,
+    required TextTheme primaryTextTheme,
   }) {
     return SingleChildScrollView(
       child: Column(
@@ -100,7 +99,9 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
           const SizedBox(
             height: 15,
           ),
-          checkBoxAreaWidget(),
+          checkBoxAreaWidget(
+            primaryTextTheme: primaryTextTheme,
+          ),
           const SizedBox(
             height: 44,
           ),
@@ -113,7 +114,9 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
     );
   }
 
-  Widget checkBoxAreaWidget() {
+  Widget checkBoxAreaWidget({
+    required TextTheme primaryTextTheme,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,9 +134,9 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
           child: Text(
             'I understand that deleting my account is permanent and cannot be undone.',
             softWrap: true,
-            style: Theme.of(context).primaryTextTheme.bodyMedium!.copyWith(
-                  color: AppColors.black.withOpacity(0.75),
-                ),
+            style: primaryTextTheme.bodyMedium!.copyWith(
+              color: AppColors.black.withOpacity(0.75),
+            ),
           ),
         ),
       ],
@@ -143,6 +146,8 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
   Widget checkBoxWidget(
     BuildContext context,
   ) {
+    final DeleteAccountBloc deleteAccountBloc =
+        BlocProvider.of<DeleteAccountBloc>(context);
     return BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
       builder: (context, state) {
         return SizedBox(
@@ -159,7 +164,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
             checkColor: AppColors.black,
             value: state.checked,
             onChanged: (value) {
-              BlocProvider.of<DeleteAccountBloc>(context).add(
+              deleteAccountBloc.add(
                 CheckBoxEvent(),
               );
             },
@@ -173,6 +178,8 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
     bool isChecked,
     bool isLoading,
   ) {
+    TextTheme textTheme = Theme.of(context).textTheme;
+
     return Opacity(
       opacity: isChecked ? 1 : 0.5,
       child: AuthenticationButton(
@@ -185,14 +192,13 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
                         context,
                         title: Text(
                           "Can't delete account",
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          style: textTheme.bodyLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         content: Text(
                           "The current password you entered didn't match our records. Please double-check and try again.",
-                          style: Theme.of(context).textTheme.labelLarge,
+                          style: textTheme.labelLarge,
                         ),
                       );
                     },

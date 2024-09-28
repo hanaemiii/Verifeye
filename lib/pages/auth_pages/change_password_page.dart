@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:verifeye/base/theme/colors.dart';
 import 'package:verifeye/bloc/authentication%20blocs/change_password_bloc/change_password_bloc.dart';
 import 'package:verifeye/bloc/authentication%20blocs/change_password_bloc/change_password_event.dart';
@@ -23,6 +22,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.gray.withOpacity(0.1),
@@ -41,7 +41,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         ),
         title: Text(
           'Change password',
-          style: Theme.of(context).primaryTextTheme.headlineMedium,
+          style: primaryTextTheme.headlineMedium,
         ),
       ),
       body: Container(
@@ -59,11 +59,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               Text(
                 'Change your password',
                 textAlign: TextAlign.center,
-                style:
-                    Theme.of(context).primaryTextTheme.displayMedium!.copyWith(
-                          fontFamily: GoogleFonts.sen().fontFamily,
-                          fontSize: 40,
-                        ),
+                style: primaryTextTheme.displayMedium!.copyWith(
+                  fontSize: 40,
+                ),
               ),
               const SizedBox(
                 height: 80,
@@ -118,23 +116,26 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   }
 
   Widget confirmButtonWidget(ChangePasswordState state) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final ChangePasswordBloc changePasswordBloc =
+        BlocProvider.of<ChangePasswordBloc>(context);
     return AuthenticationButton(
       buttonName: 'Reset Password',
       loading: state.loading,
-      onTap: () => BlocProvider.of<ChangePasswordBloc>(context).add(
+      onTap: () => changePasswordBloc.add(
         SetChangePasswordEvent(
           onError: (exception) {
             showDialog.showAdaptiveDialog(
               context,
               title: Text(
                 "Can't set new password",
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               content: Text(
                 "The current password you entered didn't match our records. Please double-check and try again.",
-                style: Theme.of(context).textTheme.labelLarge,
+                style: textTheme.labelLarge,
               ),
             );
           },

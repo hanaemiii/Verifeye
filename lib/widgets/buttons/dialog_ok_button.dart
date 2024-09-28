@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DialogOkButton extends StatefulWidget {
   const DialogOkButton({super.key});
@@ -11,6 +10,9 @@ class DialogOkButton extends StatefulWidget {
 class _DialogOkButtonState extends State<DialogOkButton> {
   @override
   Widget build(BuildContext context) {
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+    Color primaryColorDark = Theme.of(context).primaryColorDark;
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
@@ -23,11 +25,10 @@ class _DialogOkButtonState extends State<DialogOkButton> {
         alignment: Alignment.center,
         child: Text(
           'OK',
-          style: Theme.of(context).primaryTextTheme.bodyMedium!.copyWith(
-                color: Theme.of(context).primaryColorDark,
-                fontWeight: FontWeight.bold,
-                fontFamily: GoogleFonts.sen().fontFamily,
-              ),
+          style: primaryTextTheme.bodyMedium!.copyWith(
+            color: primaryColorDark,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:verifeye/models/image_info_model.dart';
 import 'package:verifeye/models/searched_link_model.dart';
 import 'package:verifeye/models/user_model.dart';
 
@@ -65,5 +66,28 @@ class FirestoreDatabaseService {
         return link;
       },
     );
+  }
+
+  Stream<ImageInfo?> getImageInfo(String userUid) {
+    final DocumentReference<Map<String, dynamic>> result =
+        FirebaseFirestore.instance.collection('photoTime').doc(userUid);
+
+    return result.snapshots().map(
+      (snapshot) {
+        if (!snapshot.exists) {
+          return null;
+        }
+        final Map<String, dynamic> dataMap = snapshot.data()!;
+        return ImageInfo.fromMap(dataMap);
+      },
+    );
+  }
+
+  // delete image info from photo time collection
+  Future<void> deletePhotoInfo(String userUId) async {
+    await FirebaseFirestore.instance
+        .collection('photoTime')
+        .doc(userUId)
+        .delete();
   }
 }

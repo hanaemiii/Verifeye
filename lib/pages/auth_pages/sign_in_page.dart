@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:verifeye/base/theme/colors.dart';
 import 'package:verifeye/bloc/authentication%20blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:verifeye/bloc/authentication%20blocs/sign_in_bloc/sign_in_event.dart';
@@ -28,6 +27,8 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     double bottomHeight = MediaQuery.of(context).viewInsets.bottom;
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+
     return Scaffold(
       body: Container(
         height: screenHeight,
@@ -47,12 +48,9 @@ class _SignInPageState extends State<SignInPage> {
                 children: [
                   Text(
                     'Sign In',
-                    style: Theme.of(context)
-                        .primaryTextTheme
-                        .displayMedium!
-                        .copyWith(
-                          fontSize: 40,
-                        ),
+                    style: primaryTextTheme.displayMedium!.copyWith(
+                      fontSize: 40,
+                    ),
                   ),
                   const SizedBox(
                     height: 100,
@@ -71,6 +69,8 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Widget fieldsAndButtonWidget() {
+    TextTheme textTheme = Theme.of(context).textTheme;
+
     return BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,25 +92,37 @@ class _SignInPageState extends State<SignInPage> {
           const SizedBox(
             height: 10,
           ),
-          forgotPasswordWidget(),
+          forgotPasswordWidget(
+            textTheme: textTheme,
+          ),
           const SizedBox(
             height: 20,
           ),
-          signInButtonWidget(state.loading),
+          signInButtonWidget(
+            isLoaded: state.loading,
+            textTheme: textTheme,
+          ),
           const SizedBox(
             height: 20,
           ),
-          signUpWidget(),
+          signUpWidget(
+            textTheme: textTheme,
+          ),
         ],
       );
     });
   }
 
-  Widget signInButtonWidget(bool isLoaded) {
+  Widget signInButtonWidget({
+    required bool isLoaded,
+    required TextTheme textTheme,
+  }) {
+    SignInBloc signInBloc = BlocProvider.of<SignInBloc>(context);
+
     return AuthenticationButton(
       buttonName: 'Sign In',
       loading: isLoaded,
-      onTap: () => BlocProvider.of<SignInBloc>(context).add(
+      onTap: () => signInBloc.add(
         UserSignInEvent(
           onError: (exception) {
             adaptiveDialog.showAdaptiveDialog(
@@ -118,12 +130,14 @@ class _SignInPageState extends State<SignInPage> {
               resend: exception.code == 'not-verified',
               title: Text(
                 'Sign In Error',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              content: Text(exception.message.toString(),
-                  style: Theme.of(context).textTheme.labelLarge),
+              content: Text(
+                exception.message.toString(),
+                style: textTheme.labelLarge,
+              ),
             );
           },
           onInternetError: () {
@@ -131,12 +145,14 @@ class _SignInPageState extends State<SignInPage> {
               context,
               title: Text(
                 'No Internet Connection',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              content: Text("Please check your connection and try again.",
-                  style: Theme.of(context).textTheme.labelLarge),
+              content: Text(
+                "Please check your connection and try again.",
+                style: textTheme.labelLarge,
+              ),
             );
           },
           onSuccess: () {
@@ -154,10 +170,12 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  Widget signUpWidget() {
+  Widget signUpWidget({
+    required TextTheme textTheme,
+  }) {
     return Text.rich(
       TextSpan(
-        style: Theme.of(context).textTheme.labelLarge,
+        style: textTheme.labelLarge,
         children: [
           const TextSpan(
             text: "Don't have an account? ",
@@ -174,11 +192,10 @@ class _SignInPageState extends State<SignInPage> {
               },
               child: Text(
                 "Sign up",
-                style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                      fontFamily: GoogleFonts.sen().fontFamily,
-                      fontWeight: FontWeight.w700,
-                      decoration: TextDecoration.underline,
-                    ),
+                style: textTheme.labelLarge!.copyWith(
+                  fontWeight: FontWeight.w700,
+                  decoration: TextDecoration.underline,
+                ),
               ),
             ),
           ),
@@ -187,7 +204,9 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  Widget forgotPasswordWidget() {
+  Widget forgotPasswordWidget({
+    required TextTheme textTheme,
+  }) {
     return Align(
       alignment: Alignment.centerRight,
       child: GestureDetector(
@@ -201,9 +220,9 @@ class _SignInPageState extends State<SignInPage> {
         },
         child: Text(
           'Forgot your password?',
-          style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                color: AppColors.black.withOpacity(0.5),
-              ),
+          style: textTheme.labelMedium!.copyWith(
+            color: AppColors.black.withOpacity(0.5),
+          ),
         ),
       ),
     );

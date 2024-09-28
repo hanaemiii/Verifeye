@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:verifeye/base/theme/colors.dart';
 import 'package:verifeye/bloc/account_bloc/account_bloc.dart';
 import 'package:verifeye/bloc/account_bloc/account_event.dart';
@@ -22,6 +21,8 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+
     return PopScope(
       onPopInvokedWithResult: (bool didPop, Object? result) {
         if (didPop) {
@@ -48,7 +49,7 @@ class _EditProfileState extends State<EditProfile> {
           ),
           title: Text(
             'Edit profile',
-            style: Theme.of(context).primaryTextTheme.headlineMedium,
+            style: primaryTextTheme.headlineMedium,
           ),
         ),
         body: BlocBuilder<AccountBloc, AccountState>(builder: (context, state) {
@@ -64,7 +65,10 @@ class _EditProfileState extends State<EditProfile> {
                   const SizedBox(
                     height: 80,
                   ),
-                  photoWidget(state),
+                  photoWidget(
+                    state: state,
+                    primaryTextTheme: primaryTextTheme,
+                  ),
                   const SizedBox(
                     height: 80,
                   ),
@@ -78,7 +82,10 @@ class _EditProfileState extends State<EditProfile> {
     );
   }
 
-  Widget photoWidget(AccountState state) {
+  Widget photoWidget({
+    required AccountState state,
+    required TextTheme primaryTextTheme,
+  }) {
     return Center(
       child: Container(
         width: 120.0,
@@ -119,14 +126,18 @@ class _EditProfileState extends State<EditProfile> {
                         size: 70,
                         color: AppColors.gray,
                       ),
-            editPicWidget(),
+            editPicWidget(
+              primaryTextTheme: primaryTextTheme,
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget editPicWidget() {
+  Widget editPicWidget({
+    required TextTheme primaryTextTheme,
+  }) {
     return GestureDetector(
       onTap: () {
         showDialog.changePic(
@@ -153,11 +164,10 @@ class _EditProfileState extends State<EditProfile> {
             ),
             Text(
               'Edit picture',
-              style: Theme.of(context).primaryTextTheme.bodySmall!.copyWith(
-                    color: AppColors.white,
-                    fontFamily: GoogleFonts.sen().fontFamily,
-                    fontSize: 10,
-                  ),
+              style: primaryTextTheme.bodySmall!.copyWith(
+                color: AppColors.white,
+                fontSize: 10,
+              ),
             ),
           ],
         ),

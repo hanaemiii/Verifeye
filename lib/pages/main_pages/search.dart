@@ -50,6 +50,8 @@ class _SearchPageState extends State<SearchPage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundViolet,
@@ -61,9 +63,9 @@ class _SearchPageState extends State<SearchPage> with WidgetsBindingObserver {
         ),
         title: Text(
           'URL Verification',
-          style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(
-                color: AppColors.white,
-              ),
+          style: primaryTextTheme.bodyLarge!.copyWith(
+            color: AppColors.white,
+          ),
         ),
         elevation: 2,
       ),

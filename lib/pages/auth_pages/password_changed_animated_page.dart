@@ -26,6 +26,8 @@ class _PasswordChangedAnimatedPageState
 
   @override
   Widget build(BuildContext context) {
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Padding(
@@ -42,7 +44,7 @@ class _PasswordChangedAnimatedPageState
               Text(
                 textAlign: TextAlign.center,
                 'Your password has been successfully changed!',
-                style: Theme.of(context).primaryTextTheme.bodyLarge,
+                style: primaryTextTheme.bodyLarge,
               )
             ],
           ),

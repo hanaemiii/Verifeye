@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:verifeye/base/theme/colors.dart';
 import 'package:verifeye/bloc/authentication%20blocs/forgot_password_bloc/forgot_password_bloc.dart';
 import 'package:verifeye/bloc/authentication%20blocs/forgot_password_bloc/forgot_password_event.dart';
@@ -24,6 +23,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) {
     double height = screenHeight;
     double bottomHeight = MediaQuery.of(context).viewInsets.bottom;
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
 
     return Scaffold(
       appBar: AppBar(
@@ -40,8 +40,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           builder: (context, state) {
         return Container(
           color: AppColors.gray.withOpacity(0.1),
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 32,
+          ),
+          width: screenWidth,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -52,12 +54,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 alignment: Alignment.center,
                 child: Text(
                   'Forgot password',
-                  style: Theme.of(context)
-                      .primaryTextTheme
-                      .displayMedium!
-                      .copyWith(
-                        fontSize: 40,
-                      ),
+                  style: primaryTextTheme.displayMedium!.copyWith(
+                    fontSize: 40,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -73,9 +72,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               ),
               Text(
                 'Please write your email to receive a \nconfirmation code to set a new password.',
-                style: Theme.of(context).primaryTextTheme.labelSmall!.copyWith(
-                      color: AppColors.black.withOpacity(0.57),
-                    ),
+                style: primaryTextTheme.labelSmall!.copyWith(
+                  color: AppColors.black.withOpacity(0.57),
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -89,32 +88,35 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   Widget buttonWidget(ForgotPasswordState state) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final ForgotPasswordBloc forgotPasswordBloc =
+        BlocProvider.of<ForgotPasswordBloc>(context);
+
     return AuthenticationButton(
       buttonName: 'Confirm email',
-      onTap: () => BlocProvider.of<ForgotPasswordBloc>(context).add(
+      onTap: () => forgotPasswordBloc.add(
         SendEmailEvent(
           onSuccess: () {
             showDialog.showAdaptiveDialog(
               context,
               title: Text(
                 'Check your email',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               content: Text.rich(
                 TextSpan(
-                  style: Theme.of(context).textTheme.labelLarge,
+                  style: textTheme.labelLarge,
                   children: [
                     const TextSpan(
                       text: 'Please check the email adress ',
                     ),
                     TextSpan(
                       text: state.form.emailControl.value,
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                            fontFamily: GoogleFonts.sen().fontFamily,
-                            fontWeight: FontWeight.w400,
-                          ),
+                      style: textTheme.labelLarge!.copyWith(
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                     const TextSpan(
                       text: ' for instructions to reset your password.',

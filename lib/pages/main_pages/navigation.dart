@@ -38,6 +38,7 @@ class _NavigationPagestate extends State<NavigationPage> {
 
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).primaryColor;
     List pages = [
       const HomePage(),
       const SearchPage(),
@@ -55,7 +56,7 @@ class _NavigationPagestate extends State<NavigationPage> {
                   : 95,
           decoration: BoxDecoration(
             border: Border.all(
-              color: Theme.of(context).primaryColor,
+              color: primaryColor,
             ),
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(24.0),
@@ -90,7 +91,7 @@ class _NavigationPagestate extends State<NavigationPage> {
               ],
               currentIndex: selectedIndex!,
               onTap: onItemTapped,
-              selectedItemColor: Theme.of(context).primaryColor,
+              selectedItemColor: primaryColor,
               unselectedItemColor: Colors.grey.withOpacity(0.75),
             ),
           ),

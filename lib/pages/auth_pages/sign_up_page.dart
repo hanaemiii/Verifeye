@@ -24,6 +24,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+
     return PopScope(
       onPopInvokedWithResult: (bool didPop, Object? result) {
         if (didPop) {
@@ -59,12 +61,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   children: [
                     Text(
                       'Sign Up',
-                      style: Theme.of(context)
-                          .primaryTextTheme
-                          .displayMedium!
-                          .copyWith(
-                            fontSize: 40,
-                          ),
+                      style: primaryTextTheme.displayMedium!.copyWith(
+                        fontSize: 40,
+                      ),
                     ),
                     fieldsAdnButtonWidget(screenHeight),
                   ],
@@ -126,22 +125,27 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget signUpButtonWidget(bool isLoaded) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final SignUpBloc signUpBloc = BlocProvider.of<SignUpBloc>(context);
+
     return AuthenticationButton(
       buttonName: 'Sign Up',
       loading: isLoaded,
-      onTap: () => BlocProvider.of<SignUpBloc>(context).add(
+      onTap: () => signUpBloc.add(
         CreateUserEvent(
           onError: (exception) {
             adaptiveDialog.showAdaptiveDialog(
               context,
               title: Text(
                 'Sign Up Error',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              content: Text(exception.message.toString(),
-                  style: Theme.of(context).textTheme.labelLarge),
+              content: Text(
+                exception.message.toString(),
+                style: textTheme.labelLarge,
+              ),
             );
           },
           onInternetError: () {
@@ -149,12 +153,14 @@ class _SignUpPageState extends State<SignUpPage> {
               context,
               title: Text(
                 'No Internet Connection',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              content: Text("Please check your connection and try again.",
-                  style: Theme.of(context).textTheme.labelLarge),
+              content: Text(
+                "Please check your connection and try again.",
+                style: textTheme.labelLarge,
+              ),
             );
           },
           onSuccess: () {

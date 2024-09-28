@@ -51,6 +51,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   Widget build(BuildContext context) {
     // Update form control value
     widget.formControl.value = _controller.text;
+    TextTheme textTheme = Theme.of(context).textTheme;
 
     return ReactiveFormConfig(
       validationMessages: {
@@ -119,13 +120,13 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
             ),
           ),
           hintText: widget.hintText,
-          hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                color: AppColors.black.withOpacity(0.33),
-              ),
+          hintStyle: textTheme.bodyLarge!.copyWith(
+            color: AppColors.black.withOpacity(0.33),
+          ),
           labelText: widget.labelText,
-          labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: AppColors.black.withOpacity(0.8),
-              ),
+          labelStyle: textTheme.bodyMedium!.copyWith(
+            color: AppColors.black.withOpacity(0.8),
+          ),
           floatingLabelAlignment: FloatingLabelAlignment.start,
           floatingLabelBehavior: FloatingLabelBehavior.always,
         ),

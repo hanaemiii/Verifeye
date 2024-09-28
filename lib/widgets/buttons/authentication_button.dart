@@ -23,6 +23,8 @@ class AuthenticationButton extends StatefulWidget {
 class _AuthenticationButtonState extends State<AuthenticationButton> {
   @override
   Widget build(BuildContext context) {
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+
     return TouchRippleEffect(
       rippleColor: AppColors.white.withOpacity(0.75),
       onTap: () {
@@ -70,12 +72,9 @@ class _AuthenticationButtonState extends State<AuthenticationButton> {
                   child: Text(
                     widget.buttonName,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .primaryTextTheme
-                        .headlineSmall!
-                        .copyWith(
-                          color: AppColors.white,
-                        ),
+                    style: primaryTextTheme.headlineSmall!.copyWith(
+                      color: AppColors.white,
+                    ),
                   ),
                 ),
               ),

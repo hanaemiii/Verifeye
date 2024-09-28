@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:verifeye/bloc/authentication%20blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:verifeye/bloc/authentication%20blocs/sign_in_bloc/sign_in_event.dart';
 
@@ -14,6 +13,8 @@ class ResendEmailButton extends StatefulWidget {
 class _ResendEmailButtonState extends State<ResendEmailButton> {
   @override
   Widget build(BuildContext context) {
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+    Color primaryColorDark = Theme.of(context).primaryColorDark;
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
@@ -31,11 +32,10 @@ class _ResendEmailButtonState extends State<ResendEmailButton> {
         alignment: Alignment.center,
         child: Text(
           'Resend email',
-          style: Theme.of(context).primaryTextTheme.bodyMedium!.copyWith(
-                color: Theme.of(context).primaryColorDark,
-                fontWeight: FontWeight.bold,
-                fontFamily: GoogleFonts.sen().fontFamily,
-              ),
+          style: primaryTextTheme.bodyMedium!.copyWith(
+            color: primaryColorDark,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

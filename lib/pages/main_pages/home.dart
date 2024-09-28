@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     BlocProvider.of<MainBloc>(context).add(
       GetUserEvent(),
     );
+
     super.didChangeDependencies();
   }
 
@@ -81,45 +82,66 @@ class _HomePageState extends State<HomePage> {
           height: 200,
           fit: BoxFit.cover,
         ),
-        const SizedBox(
-          height: 50,
-        ),
+        const SizedBox(height: 50),
         MainButton(
           color: AppColors.black.withOpacity(0.8),
           title: 'Delete Selected Image',
-          onTap: () => BlocProvider.of<MainBloc>(context).add(
-            DeleteSelectedPhotoEvent(),
-          ),
+          onTap: () => BlocProvider.of<MainBloc>(context)
+              .add(DeleteSelectedPhotoEvent()),
         ),
-        const SizedBox(
-          height: 20,
-        ),
-        MainButton(
-          color: AppColors.violet.withOpacity(0.3),
-          title: 'Submit',
-          onTap: () => BlocProvider.of<MainBloc>(context).add(
-            SendToStorageEvent(),
-          ),
-        ),
+        const SizedBox(height: 20),
+        _buildImageInfo(state, context),
       ],
     );
   }
 
+  Widget _buildImageInfo(MainState state, BuildContext context) {
+    TextTheme textTheme = Theme.of(context).textTheme;
+
+    if (state.loading && state.imageInfo == null) {
+      return const Center(
+        child: CircularProgressIndicator(
+          color: AppColors.backgroundViolet,
+        ),
+      );
+    } else if (!state.loading && state.imageInfo != null) {
+      return Center(
+        child: Text(
+          'The image was captured around\n ${state.imageInfo}',
+          style: textTheme.bodyLarge!.copyWith(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      );
+    } else {
+      return MainButton(
+        color: AppColors.violet.withOpacity(0.3),
+        title: 'Submit',
+        onTap: () => BlocProvider.of<MainBloc>(context).add(
+          SendToStorageEvent(),
+        ),
+      );
+    }
+  }
+
   Widget greetingWidget(String name) {
+    TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Hi $name',
-          style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(
-                color: AppColors.white,
-              ),
+          style: primaryTextTheme.bodyLarge!.copyWith(
+            color: AppColors.white,
+          ),
         ),
         Text(
           'Nice to see you!',
-          style: Theme.of(context).primaryTextTheme.bodyMedium!.copyWith(
-                color: AppColors.white,
-              ),
+          style: primaryTextTheme.bodyMedium!.copyWith(
+            color: AppColors.white,
+          ),
         ),
       ],
     );

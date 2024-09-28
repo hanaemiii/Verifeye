@@ -1,3 +1,4 @@
+import 'package:verifeye/models/image_info_model.dart';
 import 'package:verifeye/models/user_model.dart';
 
 class MainEvent {}
@@ -16,3 +17,12 @@ class UserEvent extends MainEvent {
 }
 
 class ResetHomePageEvent extends MainEvent {}
+
+class GetImageInfoEvent extends MainEvent {}
+
+class UploadedImageTimeEvent extends MainEvent {
+  final ImageInfo? imageInfo;
+  UploadedImageTimeEvent({
+    required this.imageInfo,
+  });
+}
